@@ -1,0 +1,87 @@
+1. Creating a component Ex. Counter.js
+
+2. Foler structure:
+    redux - reducers > CounterReducer.js, rootReducer.js, ...
+          - actions > CounterActions.js, actionTypes.js, ...
+
+    # reducers- It contains the state and to modify the final state.
+    # actions- contains functions to perform actions on state.
+    # rootReducer- combines all reducer in one single object using combineReducers
+    # actionTypes- contains to perform actions to avoid typos.
+
+3. Add three button inside the Counter.js
+    - to increment the counter
+    - to decrement the counter
+    - to reset the counter
+    - h4 to render state value
+
+4. Create action types in actionTypes.js
+    - These must be exportable
+    - These must hold string value
+    - example => Export const ADD_COUNTER = "ADD_COUNTER"
+
+5. Importing these constants into respective reducer.js and action.js
+
+6. In counterReducer.js initiate the state with initial value=>
+    const initalState = {
+        amount: 0,
+    };
+
+7. In counterActions.js:
+    - Here actions are performed on the state.
+    - create a const with same initial value as state
+        const count = 0
+    - Decide what actions to perform for the state
+    - create exportable functions for adding, reducing and resettingthe state
+    # these functions will return two values 
+      1. type- it contains the actionTypes
+      2. value-  this is the updated value of count
+      example =>
+                export const addCounter = () => {
+                    return {
+                        type: ADD_COUNTER,
+                        count: ++count
+                    };
+                }
+
+8. In counterReducer.js:
+    - reducer functions accepts two arguments (state, action)
+    - The state is updated based on the action type
+    - Using switch case the state is updated.
+    - whenever a particular switch case matches, the count value associated to the  respective action will be equated to amount
+    - Keep in mind to use spread operator to remember the previous value of the state
+
+9. Combining all reducers:
+    - Importing {combineReducer} function from 'redux' we are going to combine all the reducers.
+    - Import all reducers.
+    - Example: 
+            const rootReducer = combineReducers({
+                counter: counterReducer,
+                products: productReducer,
+                cart: cartReducer,
+                .
+                .
+                .
+            });
+    - from hereafter the key name of reducer is going to be used.
+
+10. In App.js
+    - Wrap the whole app inside Provide imported from 'react-redux'
+    - create store: 
+        1. import configureStore from '@reduxjs/toolkit'
+        2. store contains an object with key value pair
+           reducer: rootReducer
+    - we can also create this store inside rootReducer
+    - pass this store as a prop to Provider
+
+-----------------------------------------------------------------------
+
+11. In Counter.js:
+    - To get the value of state from store we use useSelector
+    - By destructuring we store the state value:
+        const { amount } = useSelector((state) => state.counter);
+    -Import all actions from actions file.
+    - add the respective handle function on respective button
+    - we are going to use useDispatch from 'react-redux'
+    - dispatch the action inside the handle function
+    
