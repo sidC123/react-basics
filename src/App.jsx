@@ -3,7 +3,6 @@ import './styles/globals.css';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from '../../react-example-project-router/src/redux/rootReducer';
-import Counter from './redux/Counter';
 
 // import Exercise1 from './components/useState_Exercise/Exercise1';
 // import Exercise2 from './components/useState_Exercise/Exercise2';
@@ -17,6 +16,8 @@ import Counter from './redux/Counter';
 // import HttpPost from './components/HttpPost';
 // import Contact from './components/Contact';
 // import RegisterForm from './components/RegisterForm';
+import Form from './components/Formik_without_UI_library/Form';
+// import Counter from './redux/Counter';
 
 const store = configureStore(
   { reducer: rootReducer }
@@ -48,7 +49,11 @@ function App() {
 
       {/* <RegisterForm /> */}
 
-      <Counter />
+      <Form />
+
+      {/* <Counter /> */}
+
+
 
     </Provider>
   )
